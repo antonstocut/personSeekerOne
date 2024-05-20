@@ -1,58 +1,80 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var distance: String = "Calculating..."
-    @State private var isTracking: Bool = false
-
+    @State private var distance: Double?
+    @State private var isDetecting: Bool = false
+    
+    // MARK: View
+    
     var body: some View {
         ZStack {
-            ARViewContainer(completion: { result in
-                switch result {
-                case .success(let distance):
-                    self.distance = String(format: "%.2f meters", distance)
-                case .failure(let error):
-                    self.distance = "Error: \(error.localizedDescription)"
-                }
-            })
-            .aspectRatio(16/9, contentMode: .fit)
-            .edgesIgnoringSafeArea(.all)
+            makeHumanDetectContainer()
 
             VStack {
                 Spacer()
                 HStack {
-                    Text("Distance to detected person: \(distance)")
-                        .font(.headline)
-                        .padding()
-                        .background(Color.black.opacity(0.7))
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                    
+                    makeDistanceText()
+                
                     Spacer()
                     
-                    Button(action: {
-                        toggleTracking()
-                    }) {
-                        Image(systemName: isTracking ? "stop.circle.fill" : "play.circle.fill")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(isTracking ? .blue : .green)
-                    }
-                    .padding(10)
+                    makeTrackingButton()
                 }
                 .padding(10)
             }
         }
     }
+}
 
-    func toggleTracking() {
-        isTracking.toggle()
-        if isTracking {
-            Coordinator.shared.startLogging()
+
+// MARK: - Private
+
+private extension ContentView {
+    func makeHumanDetectContainer() -> some View {
+        HumanDetectViewContainer(isDetecting: $isDetecting, distance: $distance)
+        .edgesIgnoringSafeArea(.all)
+    }
+    
+    func makeDistanceText() -> some View {
+        let text: Text
+        
+        if let distance {
+            text = Text("ContentView.distance(\(distance))")
         } else {
-            Coordinator.shared.stopLogging()
+            if isDetecting {
+                text = Text("ContentView.detecting")
+            } else {
+                text = Text("ContentView.notDetected")
+            }
         }
+        
+        return text
+            .font(.headline)
+            .padding()
+            .background(Color.black.opacity(0.7))
+            .cornerRadius(10)
+            .foregroundColor(.white)
+    }
+    
+    func makeTrackingButton() -> some View {
+        Button(action: {
+            toggleDetection()
+        }) {
+            Image(systemName: isDetecting ? "stop.circle.fill" : "play.circle.fill")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundColor(isDetecting ? .blue : .green)
+        }
+        .padding(10)
+    }
+    
+    // MARK: Methods
+    
+    func toggleDetection() {
+        isDetecting.toggle()
     }
 }
+
+// MARK: - PreviewProvider
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
