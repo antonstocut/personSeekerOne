@@ -25,7 +25,6 @@ struct ContentView: View {
     }
 }
 
-
 // MARK: - Private
 
 private extension ContentView {

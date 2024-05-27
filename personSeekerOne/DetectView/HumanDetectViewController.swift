@@ -13,6 +13,14 @@ final class HumanDetectViewController: UIViewController {
     /// The last known view's size
     private var viewSize: CGSize = .zero
     
+    private let distanceFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+    
     private let detectHumanQueue = DispatchQueue(label: "HumanDetectViewController.detectHumanQueue", qos: .userInteractive)
     
     // MARK: View
@@ -76,16 +84,14 @@ extension HumanDetectViewController: ARSessionDelegate {
 private extension HumanDetectViewController {
     // MARK: Human Distance
     
-    func calculateHumanDistance(boundingBox: CGRect) {
+    func calculateHumanDistance(boundingBox: CGRect) -> Double? {
         let center = CGPoint(x: boundingBox.midX, y: boundingBox.midY)
         
         guard let result = rootView.hitTest(center, types: .featurePoint).first else {
-            return
+            return nil
         }
         
-        DispatchQueue.main.async { [weak self] in
-            self?.onDetect?(result.distance)
-        }
+        return result.distance
     }
     
     // MARK: Human Detection
@@ -111,31 +117,18 @@ private extension HumanDetectViewController {
                 
                 switch result {
                 case .success(let observations):
-                    guard let firstHuman = observations.first else {
-                        hideRectangle()
-                        return
+                    // Better way hide all then show new rectangles
+                    hideAllRectangle()
+                                        
+                    // Add new rectangles
+                    observations.forEach { human in
+                        // Calculate new frame
+                        self.calculateDistanceAndShowRectangle(human: human)
                     }
-                    
-                    // Transform Y coordinate and normalize the dimensions of the processed image, with the origin at the image's lower-left corner.
-                    let viewSize = viewSize
-                    let humanBox = firstHuman.boundingBox
-                    
-                    let boundingBox = CGRect(
-                        x: humanBox.minX * viewSize.width,
-                        y: (1 - humanBox.maxY) * viewSize.height,
-                        width: humanBox.width * viewSize.width,
-                        height: humanBox.height * viewSize.height
-                    )
-                    
-                    // Show rectangle near detected human
-                    showRectangle(boundingBox: boundingBox)
-                    
-                    // Calculate the distance to detected human
-                    calculateHumanDistance(boundingBox: boundingBox)
                     
                 case .failure(let error):
                     print("Detect human request error occurred: \(error)")
-                    hideRectangle()
+                    hideAllRectangle()
                 }
             }
             
@@ -145,7 +138,7 @@ private extension HumanDetectViewController {
                 try handler.perform([request])
             } catch {
                 print("Detect human error occurred: \(error)")
-                hideRectangle()
+                hideAllRectangle()
             }
         }
     }
@@ -153,24 +146,57 @@ private extension HumanDetectViewController {
     
     // MARK: Rectangle
     
-    func showRectangle(boundingBox: CGRect) {
+    func showRectangle(configuration: HumanDetectView.RectangleConfiguration) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             
             // Show rectangle on the view
-            rootView.showRectangle(rect: boundingBox)
+            rootView.showRectangle(configuration: configuration)
         }
     }
     
-    func hideRectangle() {
+    func calculateDistanceAndShowRectangle(human: VNHumanObservation) {
+        // Transform Y coordinate and normalize the dimensions of the processed image, with the origin at the image's lower-left corner.
+        let viewSize = viewSize
+        let humanBox = human.boundingBox
+        
+        let boundingBox = CGRect(
+            x: humanBox.minX * viewSize.width,
+            y: (1 - humanBox.maxY) * viewSize.height,
+            width: humanBox.width * viewSize.width,
+            height: humanBox.height * viewSize.height
+        )
+        
+        // Calculate the distance to detected human
+        let distanceText = calculateHumanDistance(boundingBox: boundingBox)
+            .map { NSNumber(value: $0) }
+            .flatMap { distanceFormatter.string(from: $0) }
+        
+        // Prepare configuration
+        let configuration = HumanDetectView.RectangleConfiguration(uuid: human.uuid, rect: boundingBox, text: distanceText)
+        
+        // Show rectangle near detected human
+        showRectangle(configuration: configuration)
+    }
+    
+    func hideRectangle(uuid: UUID) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             
             // Hide rectangle from the view
-            rootView.hideRectangle()
+            rootView.hideRectangle(uuid: uuid)
             
             // Notify about hiding rectangle
             onDetect?(nil)
+        }
+    }
+    
+    func hideAllRectangle() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            
+            // Hide all rectangles from the view
+            rootView.hideAllRectangles()
         }
     }
 }

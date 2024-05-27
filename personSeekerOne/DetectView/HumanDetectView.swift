@@ -2,29 +2,53 @@ import RealityKit
 import UIKit
 
 final class HumanDetectView: ARView {
-    private lazy var rectangleLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        layer.strokeColor = UIColor.red.cgColor
-        layer.lineWidth = 2
-        layer.fillColor = UIColor.clear.cgColor
-        return layer
-    }()
+    struct RectangleConfiguration {
+        let uuid: UUID
+        let rect: CGRect
+        let text: String?
+    }
+    
+    // MARK: Properties
+    
+    private var viewsCache = [UUID: UILabel]()
     
     // MARK: Methods
 
-    func showRectangle(rect: CGRect) {
-        // Update rectangle path
-        rectangleLayer.path = UIBezierPath(rect: rect).cgPath
+    func getLabel(for uuid: UUID) -> UILabel {
+        if let label = viewsCache[uuid] {
+            return label
+        } else {
+            let label = UILabel()
+            label.layer.borderColor = UIColor.red.cgColor
+            label.layer.borderWidth = 2
+            label.textAlignment = .center
+            viewsCache[uuid] = label
+            return label
+        }
+    }
+    
+    func showRectangle(configuration: RectangleConfiguration) {
+        let label = getLabel(for: configuration.uuid)
+        label.frame = configuration.rect
+        label.text = configuration.text
         
-        // Add sublayer if needed
-        if rectangleLayer.superlayer == nil {
-            layer.addSublayer(rectangleLayer)
+        if label.superview == nil {
+            addSubview(label)
         }
     }
 
+    func hideRectangle(uuid: UUID) {
+        guard let label = viewsCache.removeValue(forKey: uuid) else { return }
+        label.removeFromSuperview()
+    }
     
-    func hideRectangle() {
-        // Just remove from it's superview
-        rectangleLayer.removeFromSuperlayer()
+    func hideAllRectangles() {
+        // Remove from screen
+        viewsCache.values.forEach { label in
+            label.removeFromSuperview()
+        }
+        
+        // Clean up cache
+        viewsCache.removeAll()
     }
 }
