@@ -1,12 +1,52 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ContentView.detectedN(%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detected %lld people"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайдено %lld людей"
+          }
+        }
+      }
+    },
+    "ContentView.detectedOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 person is detected"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайдено 1 людину"
+          }
+        }
+      }
+    },
     "ContentView.detecting" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Detecting..."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розпізнавання..."
           }
         }
       }
@@ -18,15 +58,62 @@
             "state" : "translated",
             "value" : "Distance to detected person %lf"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дистанція до виявленої людини %lf"
+          }
         }
       }
     },
-    "ContentView.notDetected" : {
+    "ContentView.noDetected" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Persont is not detected"
+            "value" : "No people detected"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нікого не знайдено"
+          }
+        }
+      }
+    },
+    "ContentView.notDetected" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Press the button to start detecting"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть кнопку для початку розпізнавання"
+          }
+        }
+      }
+    },
+    "ContentView.pause" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Press the button to start detecting"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть кнопку для початку розпізнавання"
           }
         }
       }

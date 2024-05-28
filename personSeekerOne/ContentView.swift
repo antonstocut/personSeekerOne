@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var distance: Double?
     @State private var isDetecting: Bool = false
+    @State private var countPeople: Int = 0
     
     // MARK: View
     
@@ -29,7 +30,7 @@ struct ContentView: View {
 
 private extension ContentView {
     func makeHumanDetectContainer() -> some View {
-        HumanDetectViewContainer(isDetecting: $isDetecting, distance: $distance)
+        HumanDetectViewContainer(isDetecting: $isDetecting, distance: $distance, countPeople: $countPeople)
         .edgesIgnoringSafeArea(.all)
     }
     
@@ -40,9 +41,17 @@ private extension ContentView {
             text = Text("ContentView.distance(\(distance))")
         } else {
             if isDetecting {
-                text = Text("ContentView.detecting")
+                if countPeople != 0 {
+                    if countPeople == 1 {
+                        text = Text("ContentView.detectedOne")
+                    } else {
+                        text = Text("ContentView.detectedN(\(countPeople)")
+                    }
+                } else {
+                    text = Text("ContentView.noDetected")
+                }
             } else {
-                text = Text("ContentView.notDetected")
+                text = Text("ContentView.pause")
             }
         }
         
