@@ -2,10 +2,12 @@ import ARKit
 import RealityKit
 
 final class HumanDetectViewController: UIViewController {
-    typealias DetectHandler = (_ distance: Double?) -> Void
+    typealias DetectHandler = (_ distance: Double? ) -> Void
+    typealias CountHandler = (_ countPeople: Int ) -> Void
     
     var onDetect: DetectHandler?
-    
+    var onCount: CountHandler?
+
     private(set) var isDetecting: Bool = false
     
     // MARK: Private Properties
@@ -125,6 +127,10 @@ private extension HumanDetectViewController {
                         // Calculate new frame
                         self.calculateDistanceAndShowRectangle(human: human)
                     }
+                    // Count people
+                    let count = observations.count
+                    self.onCount?(count)
+                    
                     
                 case .failure(let error):
                     print("Detect human request error occurred: \(error)")

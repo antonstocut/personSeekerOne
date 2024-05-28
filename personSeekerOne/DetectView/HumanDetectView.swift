@@ -22,6 +22,7 @@ final class HumanDetectView: ARView {
             label.layer.borderColor = UIColor.red.cgColor
             label.layer.borderWidth = 2
             label.textAlignment = .center
+            label.backgroundColor = UIColor.black.withAlphaComponent(0.3)
             viewsCache[uuid] = label
             return label
         }
