@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E147D032BF4B1DD00E4FB01 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E147D022BF4B1DD00E4FB01 /* ARViewContainer.swift */; };
-		2E147D052BF4B1F300E4FB01 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E147D042BF4B1F300E4FB01 /* Coordinator.swift */; };
 		2EC416222BF3B31100157AB7 /* personSeekerOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC416212BF3B31100157AB7 /* personSeekerOneApp.swift */; };
 		2EC416242BF3B31100157AB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC416232BF3B31100157AB7 /* ContentView.swift */; };
 		2EC416262BF3B31300157AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC416252BF3B31300157AB7 /* Assets.xcassets */; };
@@ -16,6 +14,10 @@
 		2EC416332BF3B31300157AB7 /* personSeekerOneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC416322BF3B31300157AB7 /* personSeekerOneTests.swift */; };
 		2EC4163D2BF3B31300157AB7 /* personSeekerOneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4163C2BF3B31300157AB7 /* personSeekerOneUITests.swift */; };
 		2EC4163F2BF3B31300157AB7 /* personSeekerOneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4163E2BF3B31300157AB7 /* personSeekerOneUITestsLaunchTests.swift */; };
+		5B8FB7FE2BFB3200009076BB /* HumanDetectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FB7FD2BFB3200009076BB /* HumanDetectView.swift */; };
+		5B8FB8002BFB3386009076BB /* HumanDetectViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FB7FF2BFB3386009076BB /* HumanDetectViewContainer.swift */; };
+		5B8FB8022BFB33FD009076BB /* HumanDetectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FB8012BFB33FD009076BB /* HumanDetectViewController.swift */; };
+		5B8FB8052BFB6408009076BB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FB8042BFB6408009076BB /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E147D022BF4B1DD00E4FB01 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
-		2E147D042BF4B1F300E4FB01 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		2EC4161E2BF3B31100157AB7 /* personSeekerOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = personSeekerOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC416212BF3B31100157AB7 /* personSeekerOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personSeekerOneApp.swift; sourceTree = "<group>"; };
 		2EC416232BF3B31100157AB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +48,10 @@
 		2EC416382BF3B31300157AB7 /* personSeekerOneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = personSeekerOneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC4163C2BF3B31300157AB7 /* personSeekerOneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personSeekerOneUITests.swift; sourceTree = "<group>"; };
 		2EC4163E2BF3B31300157AB7 /* personSeekerOneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personSeekerOneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5B8FB7FD2BFB3200009076BB /* HumanDetectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanDetectView.swift; sourceTree = "<group>"; };
+		5B8FB7FF2BFB3386009076BB /* HumanDetectViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanDetectViewContainer.swift; sourceTree = "<group>"; };
+		5B8FB8012BFB33FD009076BB /* HumanDetectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanDetectViewController.swift; sourceTree = "<group>"; };
+		5B8FB8042BFB6408009076BB /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +102,10 @@
 		2EC416202BF3B31100157AB7 /* personSeekerOne */ = {
 			isa = PBXGroup;
 			children = (
+				5B8FB8032BFB63FE009076BB /* Resources */,
 				2EC416212BF3B31100157AB7 /* personSeekerOneApp.swift */,
 				2EC416232BF3B31100157AB7 /* ContentView.swift */,
-				2E147D022BF4B1DD00E4FB01 /* ARViewContainer.swift */,
-				2E147D042BF4B1F300E4FB01 /* Coordinator.swift */,
-				2EC416252BF3B31300157AB7 /* Assets.xcassets */,
+				5B8FB7FC2BFB31F1009076BB /* DetectView */,
 				2EC416272BF3B31300157AB7 /* Preview Content */,
 			);
 			path = personSeekerOne;
@@ -131,6 +134,25 @@
 				2EC4163E2BF3B31300157AB7 /* personSeekerOneUITestsLaunchTests.swift */,
 			);
 			path = personSeekerOneUITests;
+			sourceTree = "<group>";
+		};
+		5B8FB7FC2BFB31F1009076BB /* DetectView */ = {
+			isa = PBXGroup;
+			children = (
+				5B8FB7FD2BFB3200009076BB /* HumanDetectView.swift */,
+				5B8FB8012BFB33FD009076BB /* HumanDetectViewController.swift */,
+				5B8FB7FF2BFB3386009076BB /* HumanDetectViewContainer.swift */,
+			);
+			path = DetectView;
+			sourceTree = "<group>";
+		};
+		5B8FB8032BFB63FE009076BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2EC416252BF3B31300157AB7 /* Assets.xcassets */,
+				5B8FB8042BFB6408009076BB /* Localizable.xcstrings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +261,7 @@
 			files = (
 				2EC416292BF3B31300157AB7 /* Preview Assets.xcassets in Resources */,
 				2EC416262BF3B31300157AB7 /* Assets.xcassets in Resources */,
+				5B8FB8052BFB6408009076BB /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,10 +286,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E147D052BF4B1F300E4FB01 /* Coordinator.swift in Sources */,
+				5B8FB8022BFB33FD009076BB /* HumanDetectViewController.swift in Sources */,
 				2EC416242BF3B31100157AB7 /* ContentView.swift in Sources */,
+				5B8FB7FE2BFB3200009076BB /* HumanDetectView.swift in Sources */,
 				2EC416222BF3B31100157AB7 /* personSeekerOneApp.swift in Sources */,
-				2E147D032BF4B1DD00E4FB01 /* ARViewContainer.swift in Sources */,
+				5B8FB8002BFB3386009076BB /* HumanDetectViewContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

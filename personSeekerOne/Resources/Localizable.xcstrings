@@ -1,0 +1,36 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "ContentView.detecting" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detecting..."
+          }
+        }
+      }
+    },
+    "ContentView.distance(%lf)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance to detected person %lf"
+          }
+        }
+      }
+    },
+    "ContentView.notDetected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Persont is not detected"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
